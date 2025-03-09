@@ -9,5 +9,4 @@ public class Machines : MonoBehaviour
     public Transform cupPlace;
     public Canvas myCanvas;
 
-    public virtual void MyGame() { }
 }

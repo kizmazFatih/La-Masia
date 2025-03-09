@@ -6,7 +6,8 @@ public class Trash : Machines, IInteractable
 {
     public void Interact(Transform handle)
     {
-        Destroy(handle.GetChild(0).gameObject);
+        if (handle.GetChild(0).tag == "Product")
+        { Destroy(handle.GetChild(0).gameObject); }
     }
 
     public void Release(Transform handle)

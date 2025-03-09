@@ -1,12 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class EspressoMachine : Machines, IInteractable
+public class Faucet : Machines , IInteractable
 {
-
-
     public void Interact(Transform handle)
     {
         if (cupPlace.childCount > 0)
@@ -34,20 +32,15 @@ public class EspressoMachine : Machines, IInteractable
                 Debug.Log("Espresso Machine can only take coffee");
             }
         }
-
-
     }
 
-
-    public void DoMyJob()
+    private void DoMyJob()
     {
         if (cupPlace.childCount >= 0)
         {
-            cupPlace.GetChild(0).GetComponent<Cup>().shot += 1;
+            cupPlace.GetChild(0).GetComponent<Cup>().water += 1;
         }
     }
-
-   
 
     public void Release(Transform handle)
     {
@@ -60,6 +53,5 @@ public class EspressoMachine : Machines, IInteractable
         return myCanvas;
     }
 
-
-
+    
 }

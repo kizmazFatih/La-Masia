@@ -29,13 +29,12 @@ public class RaySystem : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, rayDistance))
         {
 
-            if (handle.childCount != 0 && handle.GetChild(0).tag != "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
+            if (handle.childCount != 0 && handle.GetChild(0).tag == "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
             {
                rayDistance = 15f;
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //Shoot(hit);
                     EventDispatcher.SummonEvent("Shoot", hit);
                 }
             }
@@ -101,20 +100,6 @@ public class RaySystem : MonoBehaviour
     }
 
 
-    /*void Shoot(RaycastHit hit)
-    {
-        if (hit.transform.tag == "Customer")
-        {
-            GameObject hit_object = hit.transform.root.gameObject;
-            Rigidbody[] rigidbodies = hit_object.GetComponentsInChildren<Rigidbody>();
-            foreach (Rigidbody rigidbody in rigidbodies)
-            {
-                rigidbody.isKinematic = false;
-            }
-
-            hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(Camera.main.transform.forward * 15f, hit.point, ForceMode.Impulse);
-        }
-
-    }*/
+    
 
 }
