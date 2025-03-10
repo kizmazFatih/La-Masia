@@ -7,8 +7,8 @@ public class CameraSwitcher : MonoBehaviour
 {
     public static CameraSwitcher instance;
 
-    [SerializeField] private CinemachineVirtualCamera mainCamera;
-    [SerializeField] private CinemachineVirtualCamera FaucetCamera;
+    [SerializeField] private List<CinemachineVirtualCamera> cameras;
+
 
 
     void Awake()
@@ -23,20 +23,17 @@ public class CameraSwitcher : MonoBehaviour
         }
 
 
-        EventDispatcher.RegisterFunction("SwitchCamera", SwitchCamera);
+        EventDispatcher.RegisterFunction<int>("SwitchCamera", SwitchCamera);
     }
 
-    void Update()
+
+    void SwitchCamera(int cam_id)
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        foreach (CinemachineVirtualCamera camera in cameras)
         {
-            SwitchCamera();
+            camera.Priority = 0;
         }
-    }
+        cameras[cam_id].Priority = 1;
 
-    void SwitchCamera()
-    {
-        mainCamera.Priority = 0;
-        FaucetCamera.Priority = 1;
     }
 }

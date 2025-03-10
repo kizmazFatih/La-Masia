@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Faucet : Machines, IInteractable
 {
+    [SerializeField] private TurnObjects turnObjects;
+
     public void Interact(Transform handle)
     {
         if (cupPlace.childCount > 0)
@@ -21,7 +23,9 @@ public class Faucet : Machines, IInteractable
                 {
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
-                    EventDispatcher.SummonEvent("SwitchCamera");
+                    EventDispatcher.SummonEvent("SwitchCamera", 1);//Faucet kameraya geçiş
+                    ScriptsManager.instance.GoTurn();
+
                 }
                 else
                 {
@@ -40,6 +44,8 @@ public class Faucet : Machines, IInteractable
         if (cupPlace.childCount >= 0)
         {
             cupPlace.GetChild(0).GetComponent<Cup>().water += 1;
+            EventDispatcher.SummonEvent("SwitchCamera", 0);//Fps kameraya geçiş
+            ScriptsManager.instance.GoFPS();
         }
     }
 

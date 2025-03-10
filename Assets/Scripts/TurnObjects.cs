@@ -12,7 +12,7 @@ public class TurnObjects : MonoBehaviour
     private Vector2 last_position;
 
     private float angle;
-
+    private float default_rotation;
 
 
     void Update()
@@ -21,14 +21,17 @@ public class TurnObjects : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             first_position = Input.mousePosition;
+            default_rotation = transform.localEulerAngles.z;
         }
         if (Input.GetMouseButton(0))
         {
+            Debug.Log(default_rotation);
             last_position = Input.mousePosition;
             angle = Mathf.Atan2(last_position.y - first_position.y, last_position.x - first_position.x) * Mathf.Rad2Deg;
-            transform.localRotation = Quaternion.Euler(0, transform.eulerAngles.y, angle);
-
+            transform.localRotation = Quaternion.Euler(0, transform.eulerAngles.y, default_rotation + angle);
+            
         }
+
 
     }
 }
