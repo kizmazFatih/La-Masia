@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Faucet : Machines , IInteractable
+public class Faucet : Machines, IInteractable
 {
     public void Interact(Transform handle)
     {
@@ -21,6 +21,7 @@ public class Faucet : Machines , IInteractable
                 {
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
+                    EventDispatcher.SummonEvent("SwitchCamera");
                 }
                 else
                 {
@@ -53,5 +54,5 @@ public class Faucet : Machines , IInteractable
         return myCanvas;
     }
 
-    
+
 }
