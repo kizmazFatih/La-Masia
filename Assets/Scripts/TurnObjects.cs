@@ -2,36 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 public class TurnObjects : MonoBehaviour
 {
     [SerializeField] private RawImage cursor;
-    public float sensitivity = 2.0f;
-    private Vector2 first_position;
-    private Vector2 last_position;
 
-    private float angle;
-    private float default_rotation;
+    float first_x;
+    float delta;
+    public float total_rotation;
 
-
-    void Update()
+    private void Update()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
-            first_position = Input.mousePosition;
-            default_rotation = transform.localEulerAngles.z;
+            first_x = Input.mousePosition.x;
         }
         if (Input.GetMouseButton(0))
         {
-            Debug.Log(default_rotation);
-            last_position = Input.mousePosition;
-            angle = Mathf.Atan2(last_position.y - first_position.y, last_position.x - first_position.x) * Mathf.Rad2Deg;
-            transform.localRotation = Quaternion.Euler(0, transform.eulerAngles.y, default_rotation + angle);
-            
+
+
+            delta = Input.mousePosition.x - first_x;
+            if ((total_rotation + delta <= 0 && delta < 0) || (total_rotation + delta >= 720 && delta > 0))
+            {
+                return;
+            }
+            else
+            {
+
+                transform.localRotation = Quaternion.Euler(0, 90, total_rotation + delta);
+            }
+
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            total_rotation += delta;
+            total_rotation = Mathf.Clamp(total_rotation, 0, 720);
         }
 
-
     }
+
+
 }
