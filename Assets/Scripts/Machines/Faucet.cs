@@ -25,6 +25,7 @@ public class Faucet : Machines, IInteractable
                     product.position = cupPlace.position;
                     EventDispatcher.SummonEvent("SwitchCamera", 1);//Faucet kameraya geçiş
                     ScriptsManager.instance.GoTurn();
+                    turnObjects.UpdateCup(product);
 
                 }
                 else
@@ -46,6 +47,7 @@ public class Faucet : Machines, IInteractable
             cupPlace.GetChild(0).GetComponent<Cup>().water += 1;
             EventDispatcher.SummonEvent("SwitchCamera", 0);//Fps kameraya geçiş
             ScriptsManager.instance.GoFPS();
+
         }
     }
 

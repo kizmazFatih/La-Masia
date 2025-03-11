@@ -7,11 +7,14 @@ using UnityEngine.UI;
 
 public class TurnObjects : MonoBehaviour
 {
-    [SerializeField] private RawImage cursor;
+    private Transform cup;
 
+    [Header("Faucet variables")]
     float first_x;
     float delta;
     public float total_rotation;
+
+
 
     private void Update()
     {
@@ -30,7 +33,6 @@ public class TurnObjects : MonoBehaviour
             }
             else
             {
-
                 transform.localRotation = Quaternion.Euler(0, 90, total_rotation + delta);
             }
 
@@ -39,8 +41,17 @@ public class TurnObjects : MonoBehaviour
         {
             total_rotation += delta;
             total_rotation = Mathf.Clamp(total_rotation, 0, 720);
+            delta = 0;
         }
 
+        if (cup == null) return;
+        cup.GetComponent<Cup>().water += total_rotation == 0 ? (delta / 720) * Time.deltaTime : (total_rotation / 720) * Time.deltaTime;
+
+    }
+
+    public void UpdateCup(Transform new_cup)
+    {
+        cup = new_cup;
     }
 
 
