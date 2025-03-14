@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using Cinemachine;
+using UnityEngine;
+
+
+
+[CreateAssetMenu(menuName = "ScriptableObjects/CameraSO")]
+
+public class CameraSO : ScriptableObject
+{
+
+    public Vector3 camera_position;
+    public Vector3 camera_rotation;
+    public Transform follow;
+    public Transform lookAt;
+
+
+    public void ApplySettings(CinemachineVirtualCamera camera)
+    {
+        camera.Follow = follow;
+        camera.LookAt = lookAt;
+        camera.transform.position = camera_position;
+        camera.transform.rotation = Quaternion.Euler(camera_rotation);
+    }
+
+}

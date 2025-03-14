@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627048aa8cb118849933775b34720d0c, type: 3}
+  m_Name: FaucetCamera
+  m_EditorClassIdentifier: 
+  camera_position: {x: 8, y: 1.725, z: 4}
+  camera_rotation: {x: 23, y: 90, z: 0}
+  follow: {fileID: 4537812212637813130, guid: 7ace64fb09f85a342ab87eddd1ea76fe, type: 3}
+  lookAt: {fileID: 4537812212637813130, guid: 7ace64fb09f85a342ab87eddd1ea76fe, type: 3}

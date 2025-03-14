@@ -1,12 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Faucet : Machines, IInteractable
+public class IceMachine : Machines, IInteractable
 {
-    [SerializeField] private TurnObjects turnObjects;
 
+    [SerializeField] private GripPull gripPull;
     public void Interact(Transform handle)
     {
         if (cupPlace.childCount > 0)
@@ -23,9 +22,9 @@ public class Faucet : Machines, IInteractable
                 {
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
-                    CameraSwitcher.instance.SwitchCamera(0);
-                    ScriptsManager.instance.GoTurn();
-                    turnObjects.cup = product;
+                    CameraSwitcher.instance.SwitchCamera(1);
+                    ScriptsManager.instance.GoIce();
+                    gripPull.cup = product;
                 }
                 else
                 {
@@ -39,12 +38,6 @@ public class Faucet : Machines, IInteractable
         }
     }
 
-    private void DoMyJob()
-    {
-        CameraSwitcher.instance.SwitchCamera(0);
-        ScriptsManager.instance.GoFPS();
-    }
-
     public void Release(Transform handle)
     {
         throw new System.NotImplementedException();
@@ -56,5 +49,18 @@ public class Faucet : Machines, IInteractable
         return myCanvas;
     }
 
+    public void DoMyJob()
+    {
+        if (cupPlace.childCount >= 0)
+        {
+            cupPlace.GetChild(0).GetComponent<Cup>().ice += 2;
+            CameraSwitcher.instance.SwitchCamera(1);
+            ScriptsManager.instance.GoFPS();
+
+        }
+    }
+
 
 }
+
+

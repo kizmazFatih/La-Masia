@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class TurnObjects : MonoBehaviour
 {
-    private Transform cup;
+    public Transform cup;
 
     [Header("Faucet variables")]
     float first_x;
@@ -49,10 +49,8 @@ public class TurnObjects : MonoBehaviour
 
     }
 
-    public void UpdateCup(Transform new_cup)
-    {
-        cup = new_cup;
-    }
+
 
 
 }
+

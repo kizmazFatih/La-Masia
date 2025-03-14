@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627048aa8cb118849933775b34720d0c, type: 3}
+  m_Name: IceMachine
+  m_EditorClassIdentifier: 
+  camera_position: {x: 7.5, y: 2.3, z: -3}
+  camera_rotation: {x: 25, y: 90, z: 0}
+  follow: {fileID: 4359189272138410117, guid: bc9b51beed6a51345a2bb523f081e650, type: 3}
+  lookAt: {fileID: 4359189272138410117, guid: bc9b51beed6a51345a2bb523f081e650, type: 3}

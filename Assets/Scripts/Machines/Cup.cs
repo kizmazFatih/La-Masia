@@ -18,7 +18,7 @@ public class Cup : MonoBehaviour
 
     void DefineCoffe()
     {
-
+        DefineQuality();
     }
 
     void DefineQuality()

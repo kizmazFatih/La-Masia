@@ -6,8 +6,11 @@ using UnityEngine;
 public class CameraSwitcher : MonoBehaviour
 {
     public static CameraSwitcher instance;
+    public List<CameraSO> cameraSO;
+    private bool bounce = false;
 
-    [SerializeField] private List<CinemachineVirtualCamera> cameras;
+    [SerializeField] private CinemachineVirtualCamera fps_camera;
+    [SerializeField] private CinemachineVirtualCamera machine_camera;
 
 
 
@@ -21,19 +24,23 @@ public class CameraSwitcher : MonoBehaviour
         {
             Destroy(this);
         }
-
-
-        EventDispatcher.RegisterFunction<int>("SwitchCamera", SwitchCamera);
     }
 
 
-    void SwitchCamera(int cam_id)
+    public void SwitchCamera(int cam_id)
     {
-        foreach (CinemachineVirtualCamera camera in cameras)
-        {
-            camera.Priority = 0;
-        }
-        cameras[cam_id].Priority = 1;
-
+        /* foreach (CinemachineVirtualCamera camera in cameras)
+         {
+             camera.Priority = 0;
+         }
+         cameras[cam_id].Priority = 1;*/
+        cameraSO[cam_id].ApplySettings(machine_camera);
+        bounce = !bounce;
+        machine_camera.Priority = bounce ? 2 : 0;
     }
+
+
+
+
+
 }
