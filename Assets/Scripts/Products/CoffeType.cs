@@ -1,0 +1,17 @@
+
+public enum CoffeType
+{
+    Espresso,
+    Americano,
+    IcedAmericano,
+    Latte,
+    IcedLatte,
+    Cappuccino,
+    IcedCappuccino,
+    Mocha,
+    IcedMocha,
+    Macchiato,
+    FlatWhite,
+    Cortado,
+    Other
+}

@@ -11,8 +11,12 @@ public class CustomerAI : MonoBehaviour, IInteractable
     private NavMeshAgent navMeshAgent;
     [SerializeField] private int placeNumber;
 
+    public CoffeType myOrder;
+
     void Start()
     {
+        myOrder = (CoffeType)Random.Range(0, 12);
+        Debug.Log(myOrder);
         EventDispatcher.RegisterFunction("GoNextPosition", GoNextPosition);
 
         myCanvas = transform.GetChild(0).GetComponent<Canvas>();

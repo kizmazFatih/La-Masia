@@ -9,6 +9,8 @@ using UnityEngine.InputSystem;
 public class FPSController : MonoBehaviour
 {
 
+    private Animator _animator;
+
     private Vector2 _input;
     private CharacterController _characterController;
     private Vector3 _direction;
@@ -26,6 +28,7 @@ public class FPSController : MonoBehaviour
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
 
     }
 
@@ -62,6 +65,7 @@ public class FPSController : MonoBehaviour
     private void ApplyMovement()
     {
         _characterController.Move(((_direction.z * transform.forward) + (_direction.x * transform.right) + (_direction.y * Vector3.up)) * speed * Time.deltaTime);
+        _animator.SetFloat("Speed", _characterController.velocity.magnitude);
     }
 
 
