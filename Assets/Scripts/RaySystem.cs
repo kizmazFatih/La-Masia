@@ -31,7 +31,7 @@ public class RaySystem : MonoBehaviour
 
             if (handle.childCount != 0 && handle.GetChild(0).tag == "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
             {
-               rayDistance = 15f;
+                rayDistance = 15f;
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -43,13 +43,16 @@ public class RaySystem : MonoBehaviour
                 var currentInteractable = hit.transform.GetComponent<IInteractable>();
                 rayDistance = 5f;
 
+
                 if (currentInteractable != null)
                 {
+                    var outline = hit.transform.GetComponent<Outline>();
                     if (lastInteractable != null && currentInteractable != lastInteractable)//Işın farklı bir objeye değerse önceki objenin UI'sini kapatıyoruz
                     {
-                        CloseCanvas();
+                        CloseCanvasAndOutline();
                     }
                     canvas = currentInteractable.ShowMyUI();
+                    outline.enabled = true;
                     canvasActive = true;
                     lastInteractable = currentInteractable;
 
@@ -61,7 +64,7 @@ public class RaySystem : MonoBehaviour
                 }
                 else
                 {
-                    CloseCanvas();
+                    CloseCanvasAndOutline();
                 }
 
 
@@ -78,7 +81,7 @@ public class RaySystem : MonoBehaviour
 
 
         }
-        else CloseCanvas();
+        else CloseCanvasAndOutline();
 
 
         if (canvas != null && canvasActive)
@@ -90,16 +93,20 @@ public class RaySystem : MonoBehaviour
 
 
 
-    void CloseCanvas()
+    void CloseCanvasAndOutline()
     {
         if (canvas != null && canvasActive)
         {
             canvas.gameObject.SetActive(false);
             canvasActive = false;
+            canvas.transform.parent.GetComponent<Outline>().enabled = false;
         }
     }
 
 
-    
+
+
+
+
 
 }

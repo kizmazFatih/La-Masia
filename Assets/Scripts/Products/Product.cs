@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Outline))]
+
 public class Product : MonoBehaviour, IInteractable
 {
     private Rigidbody rb;
