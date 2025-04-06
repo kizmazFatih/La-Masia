@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627048aa8cb118849933775b34720d0c, type: 3}
-  m_Name: IceMachine
+  m_Name: EspressoMachine
   m_EditorClassIdentifier: 
-  camera_position: {x: 7.7, y: 2.1, z: -9}
-  camera_rotation: {x: 25, y: 90, z: 0}
-  follow: {fileID: 4359189272138410117, guid: bc9b51beed6a51345a2bb523f081e650, type: 3}
-  lookAt: {fileID: 4359189272138410117, guid: bc9b51beed6a51345a2bb523f081e650, type: 3}
-  min_horizontal: 60
-  max_horizontal: 120
+  camera_position: {x: 1.8, y: 2.2, z: -10.3}
+  camera_rotation: {x: 30, y: 0, z: 0}
+  follow: {fileID: -8679921383154817045, guid: 9b38d8c61f58d7a47a47084ff6612530, type: 3}
+  lookAt: {fileID: -8679921383154817045, guid: 9b38d8c61f58d7a47a47084ff6612530, type: 3}
+  min_horizontal: -30
+  max_horizontal: 30

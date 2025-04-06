@@ -14,6 +14,7 @@ public class CameraSO : ScriptableObject
     public Vector3 camera_rotation;
     public Transform follow;
     public Transform lookAt;
+    public float min_horizontal, max_horizontal;
 
 
     public void ApplySettings(CinemachineVirtualCamera camera)
@@ -22,6 +23,8 @@ public class CameraSO : ScriptableObject
         camera.LookAt = lookAt;
         camera.transform.position = camera_position;
         camera.transform.rotation = Quaternion.Euler(camera_rotation);
+        camera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxValue = max_horizontal;
+        camera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MinValue = min_horizontal;
     }
 
 }

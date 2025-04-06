@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: FPS Camera
-    m_To: Faucet Camera
+    m_To: Machine Camera
     m_Blend:
       m_Style: 1
-      m_Time: 1
+      m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Faucet Camera
+  - m_From: Machine Camera
     m_To: FPS Camera
     m_Blend:
       m_Style: 1

@@ -23,6 +23,9 @@ public class EspressoMachine : Machines, IInteractable
                 {
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
+                    product.GetComponent<Product>().work = false;
+                    CameraSwitcher.instance.SwitchCamera(2);
+                    ScriptsManager.instance.GoIce();
                 }
                 else
                 {
@@ -43,11 +46,14 @@ public class EspressoMachine : Machines, IInteractable
     {
         if (cupPlace.childCount >= 0)
         {
+            product.GetComponent<Product>().work = true;
             cupPlace.GetChild(0).GetComponent<Cup>().shot += 1;
+            CameraSwitcher.instance.SwitchCamera(2);
+            ScriptsManager.instance.GoFPS();
         }
     }
 
-   
+
 
     public void Release(Transform handle)
     {

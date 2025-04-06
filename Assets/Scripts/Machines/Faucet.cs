@@ -23,6 +23,7 @@ public class Faucet : Machines, IInteractable
                 {
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
+                    product.GetComponent<Product>().work = false;
                     CameraSwitcher.instance.SwitchCamera(0);
                     ScriptsManager.instance.GoTurn();
                     turnObjects.cup = product;
@@ -41,6 +42,7 @@ public class Faucet : Machines, IInteractable
 
     private void DoMyJob()
     {
+        product.GetComponent<Product>().work = true;
         CameraSwitcher.instance.SwitchCamera(0);
         ScriptsManager.instance.GoFPS();
     }

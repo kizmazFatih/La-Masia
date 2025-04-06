@@ -22,6 +22,7 @@ public class IceMachine : Machines, IInteractable
                 {
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
+                    product.GetComponent<Product>().work = false;
                     CameraSwitcher.instance.SwitchCamera(1);
                     ScriptsManager.instance.GoIce();
                     gripPull.cup = product;
@@ -54,6 +55,7 @@ public class IceMachine : Machines, IInteractable
         if (cupPlace.childCount >= 0)
         {
             cupPlace.GetChild(0).GetComponent<Cup>().ice += 2;
+            product.GetComponent<Product>().work = true;
             CameraSwitcher.instance.SwitchCamera(1);
             ScriptsManager.instance.GoFPS();
 
