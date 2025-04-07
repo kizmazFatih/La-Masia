@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627048aa8cb118849933775b34720d0c, type: 3}
   m_Name: FaucetCamera
   m_EditorClassIdentifier: 
-  camera_position: {x: 3.8, y: 2.2, z: -10.3}
+  camera_position: {x: -19.5, y: 2.8, z: 12}
   camera_rotation: {x: 30, y: 0, z: 0}
   follow: {fileID: 4537812212637813130, guid: 7ace64fb09f85a342ab87eddd1ea76fe, type: 3}
   lookAt: {fileID: 4537812212637813130, guid: 7ace64fb09f85a342ab87eddd1ea76fe, type: 3}

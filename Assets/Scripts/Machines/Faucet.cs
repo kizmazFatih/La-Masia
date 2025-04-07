@@ -43,6 +43,7 @@ public class Faucet : Machines, IInteractable
     private void DoMyJob()
     {
         product.GetComponent<Product>().work = true;
+        product.transform.gameObject.layer = 0;
         CameraSwitcher.instance.SwitchCamera(0);
         ScriptsManager.instance.GoFPS();
     }

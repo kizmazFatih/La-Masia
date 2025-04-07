@@ -14,6 +14,7 @@ public class Product : MonoBehaviour, IInteractable
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         myCanvas = transform.GetChild(0).GetComponent<Canvas>();
     }
 
@@ -24,7 +25,6 @@ public class Product : MonoBehaviour, IInteractable
         {
             Take(handle);
         }
-
     }
 
     public void Take(Transform handle)
@@ -33,12 +33,19 @@ public class Product : MonoBehaviour, IInteractable
         rb.isKinematic = true;
         transform.parent = handle;
         transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        if (transform.tag == "Pistol")
+        {
+            transform.localRotation = Quaternion.Euler(-90, 0, -90);
+        }
+        else
+        {
+            transform.localRotation = Quaternion.Euler(-90, 0, 0);
+        }
     }
 
     public void Release(Transform handle)
     {
-
         rb.isKinematic = false;
         transform.parent = null;
     }

@@ -19,11 +19,13 @@ public class GripPull : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
+        if (Physics.Raycast(ray1, out RaycastHit hit, 100f))
         {
-            if (hit.transform == transform.GetChild(1))
+            if (hit.transform == transform.GetChild(2))
             {
 
 
@@ -42,21 +44,22 @@ public class GripPull : MonoBehaviour
                 delta = (Input.mousePosition.y - first_y) / factor;
 
 
-                Vector3 rotation = new Vector3(0, 0, -delta + zRotation);
+                Vector3 rotation = new Vector3(0, -90, -delta + zRotation);
                 rotation.z = Mathf.Clamp(rotation.z, -45, 30);
 
 
                 transform.localRotation = Quaternion.Euler(rotation);
             }
-            if (Input.GetMouseButtonUp(0))
+
+        }
+        if (Input.GetMouseButtonUp(0) && is_gripped)
+        {
+            is_gripped = false;
+            is_useable = false;
+            transform.DORotate(new Vector3(0, -90, -45), 1f).OnComplete(() => is_useable = true);
+            if (transform.localEulerAngles.z > 29)
             {
-                is_gripped = false;
-                is_useable = false;
-                transform.DORotate(new Vector3(0, 0, -45), 1f).OnComplete(() => is_useable = true);
-                if (transform.localEulerAngles.z > 29)
-                {
-                    cup.GetComponent<Cup>().ice += 2;
-                }
+                cup.GetComponent<Cup>().ice += 2;
             }
         }
     }

@@ -47,7 +47,8 @@ public class EspressoMachine : Machines, IInteractable
         if (cupPlace.childCount >= 0)
         {
             product.GetComponent<Product>().work = true;
-            cupPlace.GetChild(0).GetComponent<Cup>().shot += 1;
+            //cupPlace.GetChild(0).GetComponent<Cup>().shot += 1;
+            product.transform.gameObject.layer = 0;
             CameraSwitcher.instance.SwitchCamera(2);
             ScriptsManager.instance.GoFPS();
         }

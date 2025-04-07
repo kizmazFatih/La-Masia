@@ -41,6 +41,9 @@ public class ShopState : MonoBehaviour
     void Start()
     {
         dayContinue = true;
+
+        //Bu satır vize içindir sonradan silinecek
+        EventDispatcher.SummonEvent("SetCustomerCount", popularity);
     }
     void Update()
     {
@@ -53,12 +56,14 @@ public class ShopState : MonoBehaviour
         {
             time += 1 * Time.deltaTime;
 
-            if (time >= hourLength)
+
+            // vizeden sonra bu satır açılacak
+            /*if (time >= hourLength)
             {
                 clock += 1;
                 time = 0f;
                 EventDispatcher.SummonEvent("SetCustomerCount", popularity);
-            }
+            }*/
         }
         if (clock == 20)
         {

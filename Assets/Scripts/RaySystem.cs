@@ -12,6 +12,8 @@ public class RaySystem : MonoBehaviour
     private Canvas canvas = null;
     private bool canvasActive = false;
     private IInteractable lastInteractable = null;
+    [SerializeField] private LayerMask ignoreLayer;
+    
 
 
 
@@ -19,15 +21,21 @@ public class RaySystem : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Q) && handle.childCount != 0)
+        if (handle.childCount != 0)
         {
-            handle.GetChild(0).GetComponent<IInteractable>().Release(handle);
+            handle.GetChild(0).transform.gameObject.layer = 2;
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                handle.GetChild(0).transform.gameObject.layer = 0;
+                handle.GetChild(0).GetComponent<IInteractable>().Release(handle);
+            }
         }
 
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, rayDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, rayDistance, ~ignoreLayer))
         {
+
+            Debug.Log(hit.transform.name);
 
             if (handle.childCount != 0 && handle.GetChild(0).tag == "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
             {
@@ -44,15 +52,18 @@ public class RaySystem : MonoBehaviour
                 rayDistance = 5f;
 
 
+                //Open Outline
+                var outline = hit.transform.GetComponent<Outline>();
+                if (outline != null) outline.enabled = true;
+                //--------------------------------------------------
+
                 if (currentInteractable != null)
                 {
-                    var outline = hit.transform.GetComponent<Outline>();
                     if (lastInteractable != null && currentInteractable != lastInteractable)//Işın farklı bir objeye değerse önceki objenin UI'sini kapatıyoruz
                     {
                         CloseCanvasAndOutline();
                     }
                     canvas = currentInteractable.ShowMyUI();
-                    outline.enabled = true;
                     canvasActive = true;
                     lastInteractable = currentInteractable;
 
@@ -86,7 +97,7 @@ public class RaySystem : MonoBehaviour
 
         if (canvas != null && canvasActive)
         {
-            canvas.transform.LookAt(Camera.main.transform);
+            canvas.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         }
 
     }

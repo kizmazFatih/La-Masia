@@ -54,8 +54,9 @@ public class IceMachine : Machines, IInteractable
     {
         if (cupPlace.childCount >= 0)
         {
-            cupPlace.GetChild(0).GetComponent<Cup>().ice += 2;
+            product.GetComponent<Cup>().ice += 2;
             product.GetComponent<Product>().work = true;
+            product.transform.gameObject.layer = 0;
             CameraSwitcher.instance.SwitchCamera(1);
             ScriptsManager.instance.GoFPS();
 

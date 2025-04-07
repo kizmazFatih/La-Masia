@@ -33,7 +33,7 @@ public class TurnObjects : MonoBehaviour
             }
             else
             {
-                transform.localRotation = Quaternion.Euler(0, 90, total_rotation + delta);
+                transform.rotation = Quaternion.Euler(total_rotation + delta, 90, -90);
             }
 
         }
