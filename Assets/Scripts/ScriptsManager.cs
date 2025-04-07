@@ -11,7 +11,6 @@ public class ScriptsManager : MonoBehaviour
     [SerializeField] private TurnObjects turnObjects;
     [SerializeField] private GripPull gripPull;
 
-    private List<ScriptReference> scripts = new List<ScriptReference>();
 
 
     void Awake()
