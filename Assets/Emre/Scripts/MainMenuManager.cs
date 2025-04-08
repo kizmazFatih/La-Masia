@@ -11,7 +11,7 @@ public class MainMenuManager : MonoBehaviour
     public void StartGame()
     {
         HideAllButtons();
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(1);
         Debug.Log("Game started");
     }
 
