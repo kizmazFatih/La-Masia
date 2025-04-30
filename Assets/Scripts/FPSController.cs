@@ -14,6 +14,7 @@ public class FPSController : MonoBehaviour
     private CharacterController _characterController;
     private Vector3 _direction;
     [SerializeField] private float speed;
+    public bool controlsEnabled = true;
     [SerializeField] private float smoothTime = 0.05f;
 
     [SerializeField] private Canvas shopping_canvas;
@@ -36,6 +37,8 @@ public class FPSController : MonoBehaviour
 
     private void Update()
     {
+        if (!controlsEnabled) return;
+
         ApplyGravity();
         ApplyRotation();
         ApplyMovement();
