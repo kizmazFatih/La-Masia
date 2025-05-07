@@ -46,10 +46,7 @@ public class Cup : MonoBehaviour
         { CoffeType.Cortado,        new CoffeRecipe(0, 2, 0, 0, 1, 0) }
     };
 
-    void Start()
-    {
-        DefineCoffe();
-    }
+
 
     void DefineCoffe()
     {
@@ -95,7 +92,15 @@ public class Cup : MonoBehaviour
         score -= Mathf.Abs(correctRecipe.Shot - shot) * 10;
         score -= Mathf.Abs(correctRecipe.Ice - ice) * 5;
 
-        return Mathf.Max(0, score); // Puan 0'dan küçük olamaz
+        return Mathf.Max(0, score); //Puan 0'dan küçük olamaz
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Dezgah")
+        {
+            DefineCoffe();
+        }
     }
 
 }

@@ -6,38 +6,41 @@ using UnityEngine;
 public class Faucet : Machines, IInteractable
 {
     [SerializeField] private TurnObjects turnObjects;
+    private bool isOn = false;
 
     public void Interact(Transform handle)
     {
-        if (cupPlace.childCount > 0)
-        {
-            DoMyJob();
-        }
 
-        if (handle.childCount != 0)
+
+        if (isOn)
         {
-            product = handle.GetChild(0);
-            if (product.tag == "Product")
+            if (cupPlace.childCount > 0 && handle.childCount == 0)
             {
-                if (cupPlace.childCount == 0)
-                {
-                    product.parent = cupPlace;
-                    product.position = cupPlace.position;
-                    product.GetComponent<Product>().work = false;
-                    CameraSwitcher.instance.SwitchCamera(0);
-                    ScriptsManager.instance.GoTurn();
-                    turnObjects.cup = product;
-                }
-                else
-                {
-                    Debug.Log("Espresso Machine is full");
-                }
-            }
-            else
-            {
-                Debug.Log("Espresso Machine can only take coffee");
+                DoMyJob();
             }
         }
+        else
+        {
+            CameraSwitcher.instance.SwitchCamera(0);
+            ScriptsManager.instance.GoTurn();
+
+            if (handle.childCount != 0)
+            {
+                product = handle.GetChild(0);
+                if (product.tag == "Product")
+                {
+                    if (cupPlace.childCount == 0)
+                    {
+                        product.parent = cupPlace;
+                        product.position = cupPlace.position;
+                        product.GetComponent<Product>().work = false;
+                        turnObjects.cup = product;
+                    }
+                }
+
+            }
+        }
+        isOn = !isOn;
     }
 
     private void DoMyJob()

@@ -9,7 +9,7 @@ public class EspressoMachine : Machines, IInteractable
 
     public void Interact(Transform handle)
     {
-        if (cupPlace.childCount > 0)
+        if (cupPlace.childCount > 0&& handle.childCount == 0)
         {
             DoMyJob();
         }
@@ -25,7 +25,7 @@ public class EspressoMachine : Machines, IInteractable
                     product.position = cupPlace.position;
                     product.GetComponent<Product>().work = false;
                     CameraSwitcher.instance.SwitchCamera(2);
-                    ScriptsManager.instance.GoIce();
+                    ScriptsManager.instance.GoFree();
                 }
                 else
                 {

@@ -29,11 +29,6 @@ public class CameraSwitcher : MonoBehaviour
 
     public void SwitchCamera(int cam_id)
     {
-        /* foreach (CinemachineVirtualCamera camera in cameras)
-         {
-             camera.Priority = 0;
-         }
-         cameras[cam_id].Priority = 1;*/
         cameraSO[cam_id].ApplySettings(machine_camera);
         bounce = !bounce;
         machine_camera.Priority = bounce ? 2 : 0;

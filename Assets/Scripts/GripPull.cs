@@ -19,12 +19,13 @@ public class GripPull : MonoBehaviour
 
     private void Update()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
         if (Physics.Raycast(ray1, out RaycastHit hit, 100f))
         {
+
+            Debug.Log(hit.transform.name);
             if (hit.transform == transform.GetChild(2))
             {
 

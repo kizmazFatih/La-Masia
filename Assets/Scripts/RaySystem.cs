@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.XR.OpenVR;
 using UnityEngine;
 
 public class RaySystem : MonoBehaviour
@@ -14,9 +13,6 @@ public class RaySystem : MonoBehaviour
     private IInteractable lastInteractable = null;
     [SerializeField] private LayerMask ignoreLayer;
     
-
-
-
 
 
     void Update()
@@ -35,12 +31,12 @@ public class RaySystem : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, rayDistance, ~ignoreLayer))
         {
 
-            Debug.Log(hit.transform.name);
 
             if (handle.childCount != 0 && handle.GetChild(0).tag == "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
             {
                 rayDistance = 15f;
-
+                
+                CloseCanvasAndOutline();
                 if (Input.GetMouseButtonDown(0))
                 {
                     EventDispatcher.SummonEvent("Shoot", hit);
@@ -80,13 +76,13 @@ public class RaySystem : MonoBehaviour
 
 
 
-                if (hit.transform.gameObject.GetComponent<ILeftClick>() != null)
+                /*if (hit.transform.gameObject.GetComponent<ILeftClick>() != null)
                 {
                     if (Input.GetMouseButton(0))
                     {
                         hit.transform.gameObject.GetComponent<ILeftClick>().DoMyJob(handle);
                     }
-                }
+                }*/
             }
 
 
@@ -113,11 +109,6 @@ public class RaySystem : MonoBehaviour
             canvas.transform.parent.GetComponent<Outline>().enabled = false;
         }
     }
-
-
-
-
-
 
 
 }

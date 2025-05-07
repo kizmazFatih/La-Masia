@@ -10,13 +10,11 @@ public class CustomerAI : MonoBehaviour, IInteractable
     private Transform targetTransform;
     private NavMeshAgent navMeshAgent;
     [SerializeField] private int placeNumber;
-    [SerializeField] private Transform bar_pos;
     public CoffeType myOrder;
 
     void Start()
     {
         myOrder = (CoffeType)Random.Range(0, 12);
-        Debug.Log(myOrder);
         EventDispatcher.RegisterFunction("GoNextPosition", GoNextPosition);
 
         myCanvas = transform.GetChild(0).GetComponent<Canvas>();
@@ -33,9 +31,8 @@ public class CustomerAI : MonoBehaviour, IInteractable
 
         if (placeNumber == 0)
         {
-            //Kahve alındığında çalışacak aşağısı
             Queue.instance.queueSize--;
-            navMeshAgent.SetDestination(new Vector3(-30, 1, 5));
+            navMeshAgent.SetDestination(new Vector3(-31f, 1, 6));
             placeNumber = -1;
             Queue.instance.RemoveCustomerQueue(gameObject);
         }
