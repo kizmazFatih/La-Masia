@@ -17,30 +17,39 @@ public class Faucet : Machines, IInteractable
             if (cupPlace.childCount > 0 && handle.childCount == 0)
             {
                 DoMyJob();
+                isOn = false;
             }
         }
         else
         {
-            CameraSwitcher.instance.SwitchCamera(0);
-            ScriptsManager.instance.GoTurn();
 
-            if (handle.childCount != 0)
+            if (handle.childCount != 0 && cupPlace.childCount == 0)
             {
+                CameraSwitcher.instance.SwitchCamera(0);
+                ScriptsManager.instance.GoTurn();
+                turnObjects.transform.GetComponent<Outline>().enabled = true;
+                isOn = true;
+
                 product = handle.GetChild(0);
                 if (product.tag == "Product")
                 {
-                    if (cupPlace.childCount == 0)
-                    {
-                        product.parent = cupPlace;
-                        product.position = cupPlace.position;
-                        product.GetComponent<Product>().work = false;
-                        turnObjects.cup = product;
-                    }
+
+                    product.parent = cupPlace;
+                    product.position = cupPlace.position;
+                    product.GetComponent<Product>().work = false;
+                    turnObjects.cup = product;
+
                 }
 
             }
+            else if (cupPlace.childCount > 0 && handle.childCount == 0)
+            {
+                CameraSwitcher.instance.SwitchCamera(0);
+                ScriptsManager.instance.GoTurn();
+                turnObjects.transform.GetComponent<Outline>().enabled = true;
+                isOn = true;
+            }
         }
-        isOn = !isOn;
     }
 
     private void DoMyJob()
@@ -49,6 +58,7 @@ public class Faucet : Machines, IInteractable
         product.transform.gameObject.layer = 0;
         CameraSwitcher.instance.SwitchCamera(0);
         ScriptsManager.instance.GoFPS();
+        turnObjects.GetComponent<Outline>().enabled = false;
     }
 
     public void Release(Transform handle)
@@ -56,10 +66,10 @@ public class Faucet : Machines, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         myCanvas.gameObject.SetActive(true);
-        return myCanvas;
+        return myCanvas.transform.parent;
     }
 
 

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RecipeBookInteractable : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Transform myCanvas;
     [SerializeField] private Canvas bookCanvas;
     private bool isOpen = false;
 
@@ -11,10 +12,10 @@ public class RecipeBookInteractable : MonoBehaviour, IInteractable
         bookCanvas.gameObject.SetActive(false);
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         // UI göstermiyoruz
-        return null;
+        return myCanvas.transform.parent;
     }
 
     public void Interact(Transform handle)

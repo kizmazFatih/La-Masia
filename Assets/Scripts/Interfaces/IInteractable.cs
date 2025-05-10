@@ -9,7 +9,7 @@ public interface IInteractable
 
     void Release(Transform handle);
 
-    Canvas ShowMyUI();
+    Transform ShowMyUI();
 
 
 

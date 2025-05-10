@@ -240,6 +240,7 @@ MonoBehaviour:
   chocolate_syrup: 0
   shot: 0
   ice: 0
+  myCoffeSize: 2
 --- !u!65 &4469328918433818308
 BoxCollider:
   m_ObjectHideFlags: 0

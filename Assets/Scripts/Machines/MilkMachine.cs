@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MilkMachine : Machines, IInteractable
 {
+    [SerializeField] private Transform milkButton;
     public void Interact(Transform handle)
     {
         if (cupPlace.childCount > 0 && handle.childCount == 0)
@@ -23,15 +24,9 @@ public class MilkMachine : Machines, IInteractable
                     product.GetComponent<Product>().work = false;
                     CameraSwitcher.instance.SwitchCamera(3);
                     ScriptsManager.instance.GoFree();
+                    milkButton.GetComponent<Outline>().enabled = true;
                 }
-                else
-                {
-                    Debug.Log("Milk Machine is full");
-                }
-            }
-            else
-            {
-                Debug.Log("Milk Machine can only take coffee");
+
             }
         }
     }
@@ -41,10 +36,10 @@ public class MilkMachine : Machines, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         myCanvas.gameObject.SetActive(true);
-        return myCanvas;
+        return myCanvas.transform.parent;
     }
     public void DoMyJob()
     {
@@ -55,6 +50,7 @@ public class MilkMachine : Machines, IInteractable
             product.transform.gameObject.layer = 0;
             CameraSwitcher.instance.SwitchCamera(3);
             ScriptsManager.instance.GoFPS();
+            milkButton.GetComponent<Outline>().enabled = false;
 
         }
     }

@@ -19,10 +19,10 @@ public class CupSpawner : MonoBehaviour, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         myCanvas.gameObject.SetActive(true);
-        return myCanvas;
+        return myCanvas.transform.parent;
     }
 
 }

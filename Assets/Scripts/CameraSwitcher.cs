@@ -9,8 +9,13 @@ public class CameraSwitcher : MonoBehaviour
     public List<CameraSO> cameraSO;
     private bool bounce = false;
 
+    [SerializeField] private RaySystem raySystem;
     [SerializeField] private CinemachineVirtualCamera fps_camera;
     [SerializeField] private CinemachineVirtualCamera machine_camera;
+    int characterLayer;
+    int armsLayer;
+
+
 
 
 
@@ -24,6 +29,8 @@ public class CameraSwitcher : MonoBehaviour
         {
             Destroy(this);
         }
+        characterLayer = LayerMask.NameToLayer("Character");
+        armsLayer = LayerMask.NameToLayer("Arms");
     }
 
 
@@ -36,6 +43,20 @@ public class CameraSwitcher : MonoBehaviour
 
 
 
+    public void MachineCameraEvent()
+    {
+        Camera.main.cullingMask &= ~(1 << characterLayer);
+        Camera.main.cullingMask &= ~(1 << armsLayer);
+        raySystem.machineCameraActive = true;
+    }
 
+    public void FPSCameraEvent()
+    {
+        Camera.main.cullingMask &= ~(1 << characterLayer);
+        Camera.main.cullingMask |= 1 << armsLayer;
+        raySystem.machineCameraActive = false;
+    }
 
 }
+
+

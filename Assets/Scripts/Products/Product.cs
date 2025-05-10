@@ -50,11 +50,11 @@ public class Product : MonoBehaviour, IInteractable
         transform.parent = null;
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         if (!work) return null;
         myCanvas.gameObject.SetActive(true);
-        return myCanvas;
+        return myCanvas.transform.parent;
     }
 
 

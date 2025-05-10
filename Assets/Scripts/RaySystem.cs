@@ -8,11 +8,15 @@ public class RaySystem : MonoBehaviour
 
 
     private float rayDistance = 5f;
-    private Canvas canvas = null;
+    private Transform activeObject = null;
+    private GameObject canvas;
     private bool canvasActive = false;
+    public bool machineCameraActive = false;
     private IInteractable lastInteractable = null;
     [SerializeField] private LayerMask ignoreLayer;
-    
+
+
+
 
 
     void Update()
@@ -31,11 +35,11 @@ public class RaySystem : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, rayDistance, ~ignoreLayer))
         {
 
-
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
             if (handle.childCount != 0 && handle.GetChild(0).tag == "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
             {
                 rayDistance = 15f;
-                
+
                 CloseCanvasAndOutline();
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -48,10 +52,6 @@ public class RaySystem : MonoBehaviour
                 rayDistance = 5f;
 
 
-                //Open Outline
-                var outline = hit.transform.GetComponent<Outline>();
-                if (outline != null) outline.enabled = true;
-                //--------------------------------------------------
 
                 if (currentInteractable != null)
                 {
@@ -59,7 +59,11 @@ public class RaySystem : MonoBehaviour
                     {
                         CloseCanvasAndOutline();
                     }
-                    canvas = currentInteractable.ShowMyUI();
+                    activeObject = currentInteractable.ShowMyUI();
+                    //activeObject.GetComponent<Outline>().enabled = true;
+                    if (!machineCameraActive) { activeObject.GetComponent<Outline>().enabled = true; }
+                    else { activeObject.GetComponent<Outline>().enabled = false; }
+
                     canvasActive = true;
                     lastInteractable = currentInteractable;
 
@@ -73,16 +77,6 @@ public class RaySystem : MonoBehaviour
                 {
                     CloseCanvasAndOutline();
                 }
-
-
-
-                /*if (hit.transform.gameObject.GetComponent<ILeftClick>() != null)
-                {
-                    if (Input.GetMouseButton(0))
-                    {
-                        hit.transform.gameObject.GetComponent<ILeftClick>().DoMyJob(handle);
-                    }
-                }*/
             }
 
 
@@ -91,22 +85,26 @@ public class RaySystem : MonoBehaviour
         else CloseCanvasAndOutline();
 
 
-        if (canvas != null && canvasActive)
+        if (activeObject != null && canvasActive)
         {
-            canvas.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+            if (activeObject.childCount != 0)
+            {
+                canvas = activeObject.GetChild(0).gameObject;
+                canvas.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+            }
         }
 
     }
 
 
 
-    void CloseCanvasAndOutline()
+    public void CloseCanvasAndOutline()
     {
-        if (canvas != null && canvasActive)
+        if (activeObject != null && canvasActive)
         {
-            canvas.gameObject.SetActive(false);
+            canvas?.SetActive(false);
             canvasActive = false;
-            canvas.transform.parent.GetComponent<Outline>().enabled = false;
+            activeObject.transform.GetComponent<Outline>().enabled = false;
         }
     }
 
