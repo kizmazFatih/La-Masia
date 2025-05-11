@@ -8,7 +8,7 @@ public class Cup : MonoBehaviour
 {
     public float water, milk, foam, chocolate_syrup;
     public int shot, ice;
-    private CoffeType myCoffe = CoffeType.Other;
+    [SerializeField] private CoffeType myCoffe = CoffeType.Other;
     [SerializeField] private CoffeeSize myCoffeSize;
 
     public struct CoffeRecipe
@@ -69,6 +69,7 @@ public class Cup : MonoBehaviour
         }
 
         myCoffe = CoffeType.Other;
+
     }
 
 

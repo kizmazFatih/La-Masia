@@ -97,6 +97,8 @@ public class CustomerAI : MonoBehaviour, IInteractable
         return myCanvas.transform.parent;
     }
 
+    //Buradan aşağısı müşterinin süresiyle ilgili fonksiyonlar
+    //duration: Müşterinin bekleme süresini tutan değişken
     public void SetDuration()
     {
         InvokeRepeating(nameof(DurationTimer), 0, 1f);

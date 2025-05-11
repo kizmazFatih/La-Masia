@@ -5,6 +5,7 @@ using UnityEngine;
 public class MilkMachine : Machines, IInteractable
 {
     [SerializeField] private Transform milkButton;
+
     public void Interact(Transform handle)
     {
         if (cupPlace.childCount > 0 && handle.childCount == 0)
@@ -45,7 +46,6 @@ public class MilkMachine : Machines, IInteractable
     {
         if (cupPlace.childCount >= 0)
         {
-            product.GetComponent<Cup>().ice += 2;
             product.GetComponent<Product>().work = true;
             product.transform.gameObject.layer = 0;
             CameraSwitcher.instance.SwitchCamera(3);
@@ -54,6 +54,11 @@ public class MilkMachine : Machines, IInteractable
 
         }
     }
+
+
+    
+
+    
 
 
 }
