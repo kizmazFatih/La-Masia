@@ -19,13 +19,13 @@ public class GripPull : MonoBehaviour
 
     private void Update()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray1, out RaycastHit hit, 100f))
         {
-            if (hit.transform == transform.GetChild(2))
+
+            if (hit.transform == transform)
             {
 
 
@@ -57,6 +57,7 @@ public class GripPull : MonoBehaviour
             is_gripped = false;
             is_useable = false;
             transform.DORotate(new Vector3(0, -90, -45), 1f).OnComplete(() => is_useable = true);
+            
             if (transform.localEulerAngles.z > 29)
             {
                 cup.GetComponent<Cup>().ice += 2;
@@ -64,6 +65,5 @@ public class GripPull : MonoBehaviour
         }
     }
 
-
-
+   
 }

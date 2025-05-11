@@ -55,10 +55,10 @@ public class Mop : MonoBehaviour, IInteractable
         transform.parent = null;
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         myCanvas.gameObject.SetActive(true);
-        return myCanvas;
+        return myCanvas.transform.parent;
     }
 
 

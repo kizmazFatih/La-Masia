@@ -14,7 +14,11 @@ public class FPSController : MonoBehaviour
     private CharacterController _characterController;
     private Vector3 _direction;
     [SerializeField] private float speed;
+    public bool controlsEnabled = true;
     [SerializeField] private float smoothTime = 0.05f;
+
+    [SerializeField] private Canvas shopping_canvas;
+    private bool bounce =false;
 
 
 
@@ -33,9 +37,12 @@ public class FPSController : MonoBehaviour
 
     private void Update()
     {
+        if (!controlsEnabled) return;
+
         ApplyGravity();
         ApplyRotation();
         ApplyMovement();
+        OpenCloseShopping();
     }
 
 
@@ -65,6 +72,23 @@ public class FPSController : MonoBehaviour
     {
         _characterController.Move(((_direction.z * transform.forward) + (_direction.x * transform.right) + (_direction.y * Vector3.up)) * speed * Time.deltaTime);
         _animator.SetFloat("Speed", _characterController.velocity.magnitude);
+    }
+
+    public void OpenCloseShopping()
+    {
+      if(Input.GetKeyDown(KeyCode.Tab) )
+      {
+        if(!bounce)
+       {shopping_canvas.gameObject.SetActive(true);
+         
+       }
+       else 
+       {
+        shopping_canvas.gameObject.SetActive(false);
+       }
+       bounce = !bounce;
+      }
+      
     }
 
 

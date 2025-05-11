@@ -23,7 +23,7 @@ public class ScriptsManager : MonoBehaviour
         {
             Destroy(this);
         }
-     
+
 
     }
 
@@ -44,6 +44,11 @@ public class ScriptsManager : MonoBehaviour
     {
         fpsController.enabled = false;
         gripPull.enabled = true;
+    }
+
+    public void GoFree()
+    {
+        fpsController.enabled = false;
     }
 
 }

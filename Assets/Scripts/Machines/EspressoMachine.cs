@@ -6,10 +6,11 @@ using UnityEngine;
 public class EspressoMachine : Machines, IInteractable
 {
 
+    [SerializeField] private Transform espressoButton;
 
     public void Interact(Transform handle)
     {
-        if (cupPlace.childCount > 0)
+        if (cupPlace.childCount > 0 && handle.childCount == 0)
         {
             DoMyJob();
         }
@@ -25,17 +26,12 @@ public class EspressoMachine : Machines, IInteractable
                     product.position = cupPlace.position;
                     product.GetComponent<Product>().work = false;
                     CameraSwitcher.instance.SwitchCamera(2);
-                    ScriptsManager.instance.GoIce();
-                }
-                else
-                {
-                    Debug.Log("Espresso Machine is full");
+                    ScriptsManager.instance.GoFree();
+                    espressoButton.GetComponent<Outline>().enabled = true;
+
                 }
             }
-            else
-            {
-                Debug.Log("Espresso Machine can only take coffee");
-            }
+
         }
 
 
@@ -47,10 +43,10 @@ public class EspressoMachine : Machines, IInteractable
         if (cupPlace.childCount >= 0)
         {
             product.GetComponent<Product>().work = true;
-            //cupPlace.GetChild(0).GetComponent<Cup>().shot += 1;
             product.transform.gameObject.layer = 0;
             CameraSwitcher.instance.SwitchCamera(2);
             ScriptsManager.instance.GoFPS();
+            espressoButton.GetComponent<Outline>().enabled = false;
         }
     }
 
@@ -61,10 +57,10 @@ public class EspressoMachine : Machines, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         myCanvas.gameObject.SetActive(true);
-        return myCanvas;
+        return myCanvas.transform.parent;
     }
 
 
