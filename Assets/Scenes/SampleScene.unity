@@ -13354,7 +13354,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 9ead0c3d-395a-41ab-9737-2e94aae80af6
-    m_ActionName: 'Move/Interact[/Keyboard/e]'
+    m_ActionName: 'Move/Run[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Move
