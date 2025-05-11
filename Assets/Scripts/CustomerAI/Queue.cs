@@ -12,6 +12,8 @@ public class Queue : MonoBehaviour
 
     public List<GameObject> customersInQueue = new List<GameObject>();
 
+    public bool coffeTakePosition_busy = false;
+
 
     private void Awake()
     {

@@ -8,8 +8,8 @@ public class Cup : MonoBehaviour
 {
     public float water, milk, foam, chocolate_syrup;
     public int shot, ice;
-    [SerializeField] private CoffeType myCoffe = CoffeType.Other;
-    [SerializeField] private CoffeeSize myCoffeSize;
+    public CoffeType myCoffe = CoffeType.Other;
+    public CoffeeSize myCoffeSize;
 
     public struct CoffeRecipe
     {
@@ -102,6 +102,7 @@ public class Cup : MonoBehaviour
         if (other.gameObject.tag == "Dezgah")
         {
             DefineCoffe();
+            EventDispatcher.SummonEvent("IsReadyMyOrder");
         }
     }
 
