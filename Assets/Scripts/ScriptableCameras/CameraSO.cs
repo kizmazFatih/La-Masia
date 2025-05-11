@@ -15,6 +15,7 @@ public class CameraSO : ScriptableObject
     public Transform follow;
     public Transform lookAt;
     public float min_horizontal, max_horizontal;
+    public LayerMask ignore_layer;
 
 
     public void ApplySettings(CinemachineVirtualCamera camera)
@@ -25,6 +26,7 @@ public class CameraSO : ScriptableObject
         camera.transform.rotation = Quaternion.Euler(camera_rotation);
         camera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxValue = max_horizontal;
         camera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MinValue = min_horizontal;
+        Camera.main.cullingMask = ~ignore_layer;
     }
 
 }

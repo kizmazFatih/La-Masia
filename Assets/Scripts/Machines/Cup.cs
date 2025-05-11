@@ -8,7 +8,8 @@ public class Cup : MonoBehaviour
 {
     public float water, milk, foam, chocolate_syrup;
     public int shot, ice;
-    private CoffeType myCoffe = CoffeType.Other;
+    public CoffeType myCoffe = CoffeType.Other;
+    public CoffeeSize myCoffeSize;
 
     public struct CoffeRecipe
     {
@@ -46,10 +47,7 @@ public class Cup : MonoBehaviour
         { CoffeType.Cortado,        new CoffeRecipe(0, 2, 0, 0, 1, 0) }
     };
 
-    void Start()
-    {
-        DefineCoffe();
-    }
+
 
     void DefineCoffe()
     {
@@ -71,6 +69,7 @@ public class Cup : MonoBehaviour
         }
 
         myCoffe = CoffeType.Other;
+
     }
 
 
@@ -95,7 +94,16 @@ public class Cup : MonoBehaviour
         score -= Mathf.Abs(correctRecipe.Shot - shot) * 10;
         score -= Mathf.Abs(correctRecipe.Ice - ice) * 5;
 
-        return Mathf.Max(0, score); // Puan 0'dan küçük olamaz
+        return Mathf.Max(0, score); //Puan 0'dan küçük olamaz
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Dezgah")
+        {
+            DefineCoffe();
+            EventDispatcher.SummonEvent("IsReadyMyOrder");
+        }
     }
 
 }
