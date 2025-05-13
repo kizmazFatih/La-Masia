@@ -15,7 +15,7 @@ public class CustomerSpawner : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         EventDispatcher.RegisterFunction<float>("SetCustomerCount", SetCustomerCount);
 

@@ -15,12 +15,7 @@ public class Pistol : MonoBehaviour
         EventDispatcher.RegisterFunction<RaycastHit>("Shoot", Shoot);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-
-    }
 
     void Shoot(RaycastHit hit)
     {

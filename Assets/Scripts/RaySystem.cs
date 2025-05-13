@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.XR.OpenVR;
 using UnityEngine;
 
 public class RaySystem : MonoBehaviour
@@ -9,9 +8,12 @@ public class RaySystem : MonoBehaviour
 
 
     private float rayDistance = 5f;
-    private Canvas canvas = null;
+    private Transform activeObject = null;
+    private GameObject canvas;
     private bool canvasActive = false;
+    public bool machineCameraActive = false;
     private IInteractable lastInteractable = null;
+    [SerializeField] private LayerMask ignoreLayer;
 
 
 
@@ -19,23 +21,28 @@ public class RaySystem : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Q) && handle.childCount != 0)
+        if (handle.childCount != 0)
         {
-            handle.GetChild(0).GetComponent<IInteractable>().Release(handle);
+            handle.GetChild(0).transform.gameObject.layer = 2;
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                handle.GetChild(0).transform.gameObject.layer = 0;
+                handle.GetChild(0).GetComponent<IInteractable>().Release(handle);
+            }
         }
 
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, rayDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, rayDistance, ~ignoreLayer))
         {
 
-            if (handle.childCount != 0 && handle.GetChild(0).tag != "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
+            if (handle.childCount != 0 && handle.GetChild(0).tag == "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
             {
-               rayDistance = 15f;
+                rayDistance = 15f;
 
+                CloseCanvasAndOutline();
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //Shoot(hit);
                     EventDispatcher.SummonEvent("Shoot", hit);
                 }
             }
@@ -44,13 +51,19 @@ public class RaySystem : MonoBehaviour
                 var currentInteractable = hit.transform.GetComponent<IInteractable>();
                 rayDistance = 5f;
 
+
+
                 if (currentInteractable != null)
                 {
                     if (lastInteractable != null && currentInteractable != lastInteractable)//Işın farklı bir objeye değerse önceki objenin UI'sini kapatıyoruz
                     {
-                        CloseCanvas();
+                        CloseCanvasAndOutline();
                     }
-                    canvas = currentInteractable.ShowMyUI();
+                    activeObject = currentInteractable.ShowMyUI();
+                    //activeObject.GetComponent<Outline>().enabled = true;
+                    if (!machineCameraActive) { activeObject.GetComponent<Outline>().enabled = true; }
+                    else { activeObject.GetComponent<Outline>().enabled = false; }
+
                     canvasActive = true;
                     lastInteractable = currentInteractable;
 
@@ -62,59 +75,38 @@ public class RaySystem : MonoBehaviour
                 }
                 else
                 {
-                    CloseCanvas();
-                }
-
-
-
-                if (hit.transform.gameObject.GetComponent<ILeftClick>() != null)
-                {
-                    if (Input.GetMouseButton(0))
-                    {
-                        hit.transform.gameObject.GetComponent<ILeftClick>().DoMyJob(handle);
-                    }
+                    CloseCanvasAndOutline();
                 }
             }
 
 
 
         }
-        else CloseCanvas();
+        else CloseCanvasAndOutline();
 
 
-        if (canvas != null && canvasActive)
+        if (activeObject != null && canvasActive)
         {
-            canvas.transform.LookAt(Camera.main.transform);
-        }
-
-    }
-
-
-
-    void CloseCanvas()
-    {
-        if (canvas != null && canvasActive)
-        {
-            canvas.gameObject.SetActive(false);
-            canvasActive = false;
-        }
-    }
-
-
-    /*void Shoot(RaycastHit hit)
-    {
-        if (hit.transform.tag == "Customer")
-        {
-            GameObject hit_object = hit.transform.root.gameObject;
-            Rigidbody[] rigidbodies = hit_object.GetComponentsInChildren<Rigidbody>();
-            foreach (Rigidbody rigidbody in rigidbodies)
+            if (activeObject.childCount != 0)
             {
-                rigidbody.isKinematic = false;
+                canvas = activeObject.GetChild(0).gameObject;
+                canvas.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
             }
-
-            hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(Camera.main.transform.forward * 15f, hit.point, ForceMode.Impulse);
         }
 
-    }*/
+    }
+
+
+
+    public void CloseCanvasAndOutline()
+    {
+        if (activeObject != null && canvasActive)
+        {
+            canvas?.SetActive(false);
+            canvasActive = false;
+            activeObject.transform.GetComponent<Outline>().enabled = false;
+        }
+    }
+
 
 }

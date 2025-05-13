@@ -6,7 +6,8 @@ public class Trash : Machines, IInteractable
 {
     public void Interact(Transform handle)
     {
-        Destroy(handle.GetChild(0).gameObject);
+        if (handle.GetChild(0).tag == "Product")
+        { Destroy(handle.GetChild(0).gameObject); }
     }
 
     public void Release(Transform handle)
@@ -14,10 +15,10 @@ public class Trash : Machines, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public Canvas ShowMyUI()
+    public Transform ShowMyUI()
     {
         myCanvas.gameObject.SetActive(true);
-        return myCanvas;
+        return myCanvas.transform.parent;
     }
 
     // Start is called before the first frame update
