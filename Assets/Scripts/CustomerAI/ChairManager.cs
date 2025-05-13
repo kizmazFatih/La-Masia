@@ -4,6 +4,7 @@ using UnityEngine;
 public class ChairManager : MonoBehaviour
 {
     public static ChairManager instance;
+    public Transform chairs;
 
     public List<Transform> emptyChairs = new List<Transform>();
 
@@ -16,6 +17,14 @@ public class ChairManager : MonoBehaviour
         else if (instance != this)
         {
             Destroy(this);
+        }
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < chairs.childCount; i++)
+        {
+            emptyChairs.Add(chairs.GetChild(i));
         }
     }
     public void RemoveList(Transform chair)

@@ -57,19 +57,32 @@ public class ShopState : MonoBehaviour
             time += 1 * Time.deltaTime;
 
 
-            // vizeden sonra bu satır açılacak
-            /*if (time >= hourLength)
+
+            if (time >= hourLength)
             {
                 clock += 1;
                 time = 0f;
                 EventDispatcher.SummonEvent("SetCustomerCount", popularity);
-            }*/
+            }
         }
         if (clock == 20)
         {
             dayContinue = false;
             isOpen = false;
+            Time.timeScale = 0;
+            DayEnd();
+
         }
+    }
+
+
+    void DayEnd()
+    {
+        //Yeni sahneye geç
+        //kazandığımız para
+        //Rastgele eventlerle paramız azalacak
+        //İkinci güne başla
+        //Para,popoularity kaydet
     }
 
 

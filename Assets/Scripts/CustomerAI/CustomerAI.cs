@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 public class CustomerAI : MonoBehaviour, IInteractable
 {
@@ -32,7 +33,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
     {
         animator = GetComponent<Animator>();
 
-        myOrder = (CoffeType)Random.Range(0, 12);
+        myOrder = CoffeType.Espresso;//(CoffeType)Random.Range(0, 12);
         mySize = (CoffeeSize)Random.Range(0, 3);
 
         EventDispatcher.RegisterFunction("GoNextPosition", GoNextPosition);
@@ -49,7 +50,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
     {
 
         WaitMoveComplete();
-
+        if (Input.GetKeyDown(KeyCode.P)) { }
 
         if (navMeshAgent.velocity.sqrMagnitude > 0.01f)
         {
@@ -63,6 +64,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
 
         if (currentState != previousState)
         {
+            Debug.Log(currentState);
             switch (currentState)
             {
                 case CustomerState.Waiting:
@@ -72,6 +74,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
                     TakeCoffe();
                     break;
                 case CustomerState.Leaving:
+                    LeaveFromCafe();
                     break;
             }
 
@@ -111,6 +114,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
 
     public void Interact(Transform handle)
     {
+        if (currentState != CustomerState.InQueue) return;
         targetPosition = Queue.instance.coffeTakePosition_busy ? transform.position : coffeTakePosition;
         QuitQueue();
         Move();
@@ -160,10 +164,10 @@ public class CustomerAI : MonoBehaviour, IInteractable
         if (currentState == CustomerState.Waiting)
         {
             CancelInvoke(nameof(DurationTimer));
-            RateCoffe();
             cup = cup1;
             cup_cs = cup.GetComponent<Cup>();
             score = score1;
+            RateCoffe();
         }
     }
     #endregion
@@ -172,34 +176,143 @@ public class CustomerAI : MonoBehaviour, IInteractable
 
     public void RateCoffe()
     {
+
         if (cup_cs.myCoffe == myOrder)
         {
             if (cup_cs.myCoffeSize != mySize)
             {
                 score -= 15;
             }
-            Debug.Log("Your coffe is perfect!" + score);
             currentState = CustomerState.Sitting;
-        }
-        else
-        {
-            Debug.Log("Your coffe is not perfect!");
         }
 
     }
     Transform selectedChair;
+    float hangingOutTime;
     public void TakeCoffe()
     {
         isCoffeTaked = true;
+        animator.SetBool("CoffeTaked", true);
+        Payement();
+
         cup.transform.parent = cupPlace;
+        cup.transform.localScale = cup.transform.localScale / 2f;
+        cup.transform.localPosition = Vector3.zero;
+        cup.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        cup.GetComponent<Product>().enabled = false;
+
+        cup.GetComponent<Rigidbody>().isKinematic = true;
 
         selectedChair = ChairManager.instance.RandomChair();
         targetPosition = selectedChair.position;
 
         Move();
         Queue.instance.coffeTakePosition_busy = false;
+
+
+        hangingOutTime = Random.Range(15f, 30f);
+        InvokeRepeating(nameof(HangingOut), 0f, 1f);
     }
+
+
+    void HangingOut()
+    {
+        hangingOutTime -= 1;
+        if (hangingOutTime <= 0)
+        {
+            currentState = CustomerState.Leaving;
+            CancelInvoke(nameof(HangingOut));
+        }
+    }
+
     #endregion
+
+    #region Leaving
+    void LeaveFromCafe()
+    {
+        animator.SetBool("Sitting", false);
+        animator.SetBool("CoffeTaked", false);
+
+        cup.transform.parent = null;
+        cup.transform.localScale = cup.transform.localScale * 2f;
+        cup.transform.localPosition = Vector3.zero;
+        cup.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        cup.GetComponent<Product>().enabled = true;
+
+        targetPosition = quitShopPosition;
+        Move();
+    }
+
+
+
+    #endregion
+
+    int price;
+    void Payement()
+    {
+
+        switch (cup.GetComponent<Cup>().myCoffe)
+        {
+            case CoffeType.Espresso:
+                price = 8;
+                break;
+            case CoffeType.Cappuccino:
+                price = 12;
+                break;
+            case CoffeType.Latte:
+                price = 12;
+                break;
+            case CoffeType.Mocha:
+                price = 13;
+                break;
+            case CoffeType.Macchiato:
+                price = 12;
+                break;
+            case CoffeType.FlatWhite:
+                price = 12;
+                break;
+            case CoffeType.Cortado:
+                price = 12;
+                break;
+            case CoffeType.Americano:
+                price = 11;
+                break;
+            case CoffeType.IcedAmericano:
+                price = 12;
+                break;
+            case CoffeType.IcedLatte:
+                price = 13;
+                break;
+            case CoffeType.IcedCappuccino:
+                price = 13;
+                break;
+            case CoffeType.IcedMocha:
+                price = 14;
+                break;
+            default:
+                break;
+        }
+        switch (cup.GetComponent<Cup>().myCoffeSize)
+        {
+            case CoffeeSize.Small:
+                price += 0;
+                break;
+            case CoffeeSize.Medium:
+                price += 3;
+                break;
+            case CoffeeSize.Large:
+                price += 5;
+                break;
+            default:
+                break;
+        }
+        CoinSystem.instance.AddCoin(price);
+    }
+
+
+
+
+
     void WaitMoveComplete()
     {
         if (targetPosition == quitShopPosition)
@@ -210,11 +323,17 @@ public class CustomerAI : MonoBehaviour, IInteractable
                 Destroy(gameObject);
             }
         }
-        else if (targetPosition == selectedChair?.position)
+        else if (selectedChair != null)
         {
+            if (targetPosition != selectedChair?.position) return;
             if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
-                //Oturma Animasyonu
+
+                animator.SetBool("Sitting", true);
+                transform.forward = selectedChair.forward;
+                transform.position = selectedChair.position + new Vector3(0, -0.5f, 0);
+
+
             }
         }
     }

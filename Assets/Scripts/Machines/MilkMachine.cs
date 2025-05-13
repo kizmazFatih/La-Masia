@@ -5,6 +5,7 @@ using UnityEngine;
 public class MilkMachine : Machines, IInteractable
 {
     [SerializeField] private Transform milkButton;
+    [SerializeField] private Transform foamButton;
 
     public void Interact(Transform handle)
     {
@@ -23,8 +24,11 @@ public class MilkMachine : Machines, IInteractable
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
                     product.GetComponent<Product>().work = false;
+
                     CameraSwitcher.instance.SwitchCamera(3);
                     ScriptsManager.instance.GoFree();
+
+                    foamButton.GetComponent<Outline>().enabled = true;
                     milkButton.GetComponent<Outline>().enabled = true;
                 }
 
@@ -48,17 +52,21 @@ public class MilkMachine : Machines, IInteractable
         {
             product.GetComponent<Product>().work = true;
             product.transform.gameObject.layer = 0;
+            
             CameraSwitcher.instance.SwitchCamera(3);
             ScriptsManager.instance.GoFPS();
+
+
+            foamButton.GetComponent<Outline>().enabled = false;
             milkButton.GetComponent<Outline>().enabled = false;
 
         }
     }
 
 
-    
 
-    
+
+
 
 
 }

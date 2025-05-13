@@ -36,23 +36,23 @@ public class Cup : MonoBehaviour
         { CoffeType.Espresso,       new CoffeRecipe(0, 0, 0, 0, 1, 0) },
         { CoffeType.Americano,      new CoffeRecipe(5, 0, 0, 0, 1, 0) },
         { CoffeType.IcedAmericano,  new CoffeRecipe(5, 0, 0, 0, 2, 5) },
-        { CoffeType.Latte,          new CoffeRecipe(0, 7, 3, 0, 1, 0) },
-        { CoffeType.IcedLatte,      new CoffeRecipe(0, 7, 3, 0, 1, 5) },
-        { CoffeType.Cappuccino,     new CoffeRecipe(0, 6, 4, 0, 1, 0) },
-        { CoffeType.IcedCappuccino, new CoffeRecipe(0, 6, 4, 0, 1, 5) },
+        { CoffeType.Latte,          new CoffeRecipe(0, 7, 1, 0, 1, 0) },
+        { CoffeType.IcedLatte,      new CoffeRecipe(0, 7, 0, 0, 1, 8) },
+        { CoffeType.Cappuccino,     new CoffeRecipe(0, 4, 4, 0, 1, 0) },
+        { CoffeType.IcedCappuccino, new CoffeRecipe(0, 4, 3, 0, 1, 8) },
         { CoffeType.Mocha,          new CoffeRecipe(0, 7, 0, 2, 1, 0) },
-        { CoffeType.IcedMocha,      new CoffeRecipe(0, 7, 0, 2, 1, 5) },
+        { CoffeType.IcedMocha,      new CoffeRecipe(0, 5, 0, 2, 1, 8) },
         { CoffeType.Macchiato,      new CoffeRecipe(0, 0, 3, 0, 1, 0) },
-        { CoffeType.FlatWhite,      new CoffeRecipe(0, 5, 0, 0, 1, 0) },
-        { CoffeType.Cortado,        new CoffeRecipe(0, 2, 0, 0, 1, 0) }
+        { CoffeType.FlatWhite,      new CoffeRecipe(0, 6, 0, 0, 1, 0) },
+        { CoffeType.Cortado,        new CoffeRecipe(0, 3, 0, 0, 1, 0) }
     };
 
 
 
     void DefineCoffe()
     {
-        float liquid_tolerance = 1.5f; // ±2 birim hata payı
-        int thick_tolerance = 2;
+        float liquid_tolerance = 1.5f; // ±1.5 birim hata payı
+        int thick_tolerance = 1;
 
         foreach (var recipe in coffeRecipes)
         {
@@ -63,7 +63,6 @@ public class Cup : MonoBehaviour
             if (IsWithinTolerance(correctRecipe, liquid_tolerance, thick_tolerance))
             {
                 myCoffe = recipe.Key;
-                Debug.Log("Coffe: " + myCoffe + " Score: " + CalculateMatchScore(correctRecipe));
                 return;
             }
         }
@@ -83,6 +82,7 @@ public class Cup : MonoBehaviour
                Mathf.Abs(correctRecipe.Ice - ice) <= tolerance2;
     }
 
+    float score;
     float CalculateMatchScore(CoffeRecipe correctRecipe)
     {
         float score = 100f;
@@ -97,12 +97,13 @@ public class Cup : MonoBehaviour
         return Mathf.Max(0, score); //Puan 0'dan küçük olamaz
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Dezgah")
         {
             DefineCoffe();
-            EventDispatcher.SummonEvent("IsReadyMyOrder");
+            Debug.Log("SFdasda");
+            EventDispatcher.SummonEvent("IsReadyMyOrder", this.gameObject, (int)score);
         }
     }
 
