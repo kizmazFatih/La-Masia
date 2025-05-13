@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.017
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 56113b3b655ab7349bab4d7d405c258a, type: 2}
-  m_HaloStrength: 0.5
+  m_HaloStrength: 0.408
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -2152,13 +2152,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914682728}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08598884, y: 0.91801924, z: -0.267521, w: 0.27978408}
-  m_LocalPosition: {x: -43.519, y: 3.704, z: -41.454}
+  m_LocalRotation: {x: 0.031100454, y: 0.95217496, z: -0.0876907, w: 0.29104292}
+  m_LocalPosition: {x: -43.43, y: 2.59, z: -41.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 32.636, y: 146.264, z: 0.557}
+  m_LocalEulerAnglesHint: {x: 10.667, y: 146.052, z: 0.477}
 --- !u!1 &1945046101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,13 +2385,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061289112}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.037110317, y: 0.9407124, z: -0.10946923, w: 0.31890368}
-  m_LocalPosition: {x: -95.53, y: 23.1, z: -5.26}
+  m_LocalRotation: {x: 0.030225988, y: 0.9560207, z: -0.10637329, w: 0.27165347}
+  m_LocalPosition: {x: -64.79, y: 15.27, z: -23.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 13.275, y: 142.546, z: 0}
+  m_LocalEulerAnglesHint: {x: 12.698, y: 148.275, z: 0}
 --- !u!1001 &2108762129
 PrefabInstance:
   m_ObjectHideFlags: 0
