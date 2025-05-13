@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class MilkButton : MonoBehaviour
 {
-    private Animator animator;
     public bool is_open = false;
     private Transform cup;
 
@@ -14,9 +14,12 @@ public class MilkButton : MonoBehaviour
 
 
 
+    private Vector3 originalPos;
+
+
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        originalPos = transform.localPosition;
     }
 
     private void Update()
@@ -27,6 +30,8 @@ public class MilkButton : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && hit.transform == transform)
             {
+                transform.DOLocalMoveZ(originalPos.z - 0.05f, 0.5f).SetEase(Ease.OutQuad);
+
                 cup = transform.parent.GetChild(1).GetChild(0);
 
                 if (!is_open)
@@ -44,21 +49,34 @@ public class MilkButton : MonoBehaviour
                     milkEffect.gameObject.SetActive(false);
                 }
             }
+            else if (Input.GetMouseButtonUp(0) && hit.transform == transform)
+            {
+                transform.DOLocalMoveZ(originalPos.z, 0.5f).SetEase(Ease.OutQuad);
+            }
         }
         foamButton.enabled = !is_open;
     }
 
     void FillMilk()
     {
-        cup.GetComponent<Cup>().milk += 0.2f;
-        SetIndicatorPosition();
+        if (cup.GetComponent<Cup>().milk <= 6.5f)
+        {
+            cup.GetComponent<Cup>().milk += 0.2f;
+            SetIndicatorPosition();
+        }
+        else
+        {
+            CancelInvoke(nameof(FillMilk));
+            is_open = false;
+            milkEffect.gameObject.SetActive(false);
+        }
     }
 
 
     void SetIndicatorPosition()
     {
         float amount = cup.GetComponent<Cup>().milk;
-        float targetPosition = amount  - 4;
+        float targetPosition = amount - 4;
 
         if (targetPosition <= -4.1f || targetPosition >= 2.5f)
         {

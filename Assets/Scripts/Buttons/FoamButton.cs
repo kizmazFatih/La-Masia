@@ -1,20 +1,21 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class FoamButton : MonoBehaviour
 {
-    private Animator animator;
     private bool is_open = false;
     private Transform cup;
 
     [SerializeField] private Transform indicator;
     [SerializeField] private MilkButton milkButton;
-
+    private Vector3 originalPos;
 
 
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        originalPos = transform.localPosition;
     }
+
 
     private void Update()
     {
@@ -25,7 +26,7 @@ public class FoamButton : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && hit.transform == transform)
             {
                 cup = transform.parent.GetChild(1).GetChild(0);
-
+                transform.DOLocalMoveZ(originalPos.z - 0.05f, 0.5f).SetEase(Ease.OutQuad);
 
                 if (!is_open)
                 {
@@ -37,6 +38,10 @@ public class FoamButton : MonoBehaviour
                     is_open = false;
                     CancelInvoke(nameof(MakeFoam));
                 }
+            }
+            else if (Input.GetMouseButtonUp(0) && hit.transform == transform)
+            {
+                transform.DOLocalMoveZ(originalPos.z, 0.5f).SetEase(Ease.OutQuad);
             }
         }
         milkButton.enabled = !is_open;
@@ -61,7 +66,7 @@ public class FoamButton : MonoBehaviour
     void SetIndicatorPosition()
     {
         float amount = cup.GetComponent<Cup>().foam;
-        float targetPosition = amount  - 4;
+        float targetPosition = amount - 4;
         if (targetPosition <= -4.1f || targetPosition >= 2.5f)
         {
             CancelInvoke(nameof(MakeFoam));

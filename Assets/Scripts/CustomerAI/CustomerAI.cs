@@ -14,7 +14,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
     [SerializeField] private int placeNumber;
     [SerializeField] private float duration;
 
-    private Vector3 coffeTakePosition = new Vector3(-31f, 1, 6);
+    private Vector3 coffeTakePosition = new Vector3(-26f, 1, 6.5f);
     private Vector3 quitShopPosition = new Vector3(-10f, 1, 2);
 
     private Vector3 targetPosition;
