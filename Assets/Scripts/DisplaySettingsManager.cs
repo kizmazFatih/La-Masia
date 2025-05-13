@@ -19,7 +19,18 @@ public class DisplaySettingsManager : MonoBehaviour
 
     public void SetFullscreen(bool isFullscreen)
     {
-        Screen.fullScreen = isFullscreen;
+        Resolution currentResolution = Screen.currentResolution;
+
+        if (isFullscreen)
+        {
+            // Ekranı tam ekran yap ve mevcut çözünürlüğü uygula
+            Screen.SetResolution(currentResolution.width, currentResolution.height, FullScreenMode.FullScreenWindow);
+        }
+        else
+        {
+            // Pencere moduna geç
+            Screen.SetResolution(currentResolution.width, currentResolution.height, FullScreenMode.Windowed);
+        }
     }
 
     public void SetBrightness(float brightness)

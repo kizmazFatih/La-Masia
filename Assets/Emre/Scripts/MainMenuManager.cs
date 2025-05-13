@@ -111,7 +111,7 @@ public class MainMenuManager : MonoBehaviour
                 };
                 camMover.MoveAlongPath(toTabela);
 
-                StartCoroutine(ShowButtonsAfterDelay(3.8f)); // tabela'ya döndükten sonra
+                StartCoroutine(ShowButtonsAfterDelay(3.8f));
             }
         }
     }
@@ -121,4 +121,18 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         ShowMainButtons();
     }
+    public void BackFromSettings()
+    {
+        settingsPanel.SetActive(false);
+
+        Transform[] toTabela = new Transform[]
+        {
+            pathPoint1,
+            camPointTabela
+        };
+        camMover.MoveAlongPath(toTabela);
+
+        StartCoroutine(ShowButtonsAfterDelay(3.8f));
+    }
+
 }
