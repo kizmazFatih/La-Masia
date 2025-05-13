@@ -48,6 +48,9 @@ public class CameraSwitcher : MonoBehaviour
         Camera.main.cullingMask &= ~(1 << characterLayer);
         Camera.main.cullingMask &= ~(1 << armsLayer);
         raySystem.machineCameraActive = true;
+
+        Cursor.visible = true; // İmleci görünür yapar
+        Cursor.lockState = CursorLockMode.None; // İmlecin serbestçe hareket etmesini sağlar
     }
 
     public void FPSCameraEvent()
@@ -55,6 +58,9 @@ public class CameraSwitcher : MonoBehaviour
         Camera.main.cullingMask &= ~(1 << characterLayer);
         Camera.main.cullingMask |= 1 << armsLayer;
         raySystem.machineCameraActive = false;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 }

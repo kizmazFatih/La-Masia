@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject customerPrefab;
+    private GameObject customerPrefab;
+    [SerializeField] private GameObject[] customers;
     [SerializeField] private int customerCount;
 
     [SerializeField] private Vector3 spawnPosition;
@@ -61,6 +62,7 @@ public class CustomerSpawner : MonoBehaviour
 
         if (customerCount > 0)
         {
+            customerPrefab = customers[Random.Range(0, customers.Length)];
             GameObject newCustomer = Instantiate(customerPrefab, spawnPosition, Quaternion.identity);
             Queue.instance.AddCustomerQueue(newCustomer);
             customerCount--;

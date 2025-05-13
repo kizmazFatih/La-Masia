@@ -111,4 +111,41 @@ public class EventDispatcher : MonoBehaviour
             (baseEvent as UnityEvent<T>)?.RemoveListener(callback);
         }
     }
+
+
+    public static void RegisterFunction<T1, T2>(string eventName, UnityAction<T1, T2> callback)
+    {
+        UnityEvent<T1, T2> thisEvent = null;
+        if (Instance.eventRegistry.TryGetValue(eventName, out UnityEventBase baseEvent))
+        {
+            thisEvent = baseEvent as UnityEvent<T1, T2>;
+            thisEvent?.AddListener(callback);
+        }
+        else
+        {
+            thisEvent = new UnityEvent<T1, T2>();
+            thisEvent.AddListener(callback);
+            Instance.eventRegistry.Add(eventName, thisEvent);
+        }
+    }
+
+    // 2 parametreli olay çağırma
+    public static void SummonEvent<T1, T2>(string eventName, T1 param1, T2 param2)
+    {
+        if (Instance.eventRegistry.TryGetValue(eventName, out UnityEventBase baseEvent))
+        {
+            (baseEvent as UnityEvent<T1, T2>)?.Invoke(param1, param2);
+        }
+    }
+
+    // 2 parametreli olay dinleyici kaldırma
+    public static void UnregisterListener<T1, T2>(string eventName, UnityAction<T1, T2> callback)
+    {
+        if (dispatcherInstance == null) return;
+
+        if (Instance.eventRegistry.TryGetValue(eventName, out UnityEventBase baseEvent))
+        {
+            (baseEvent as UnityEvent<T1, T2>)?.RemoveListener(callback);
+        }
+    }
 }

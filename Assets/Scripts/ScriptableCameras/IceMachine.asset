@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627048aa8cb118849933775b34720d0c, type: 3}
   m_Name: IceMachine
   m_EditorClassIdentifier: 
-  camera_position: {x: -17.65, y: 2.25, z: 11}
+  camera_position: {x: -17.65, y: 2.65, z: 11}
   camera_rotation: {x: 25, y: 90, z: 0}
   follow: {fileID: 1707845162051140771, guid: e80de40f25b8b8a4d87770d0b646ecfe, type: 3}
   lookAt: {fileID: 1707845162051140771, guid: e80de40f25b8b8a4d87770d0b646ecfe, type: 3}
