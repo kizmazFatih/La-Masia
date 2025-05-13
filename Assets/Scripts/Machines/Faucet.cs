@@ -22,6 +22,7 @@ public class Faucet : Machines, IInteractable
         }
         else
         {
+            turnObjects.enabled = false;
 
             if (handle.childCount != 0 && cupPlace.childCount == 0)
             {
@@ -71,6 +72,8 @@ public class Faucet : Machines, IInteractable
         myCanvas.gameObject.SetActive(true);
         return myCanvas.transform.parent;
     }
+
+
 
 
 }
