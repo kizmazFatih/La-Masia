@@ -30,7 +30,10 @@ public class RecipeBookInteractable : MonoBehaviour, IInteractable
     {
         // Gerek yok
     }
-
+public void ForceCloseBookState()
+{
+    isOpen = false;
+}
     private void Update()
     {
         if (isOpen && Input.GetKeyDown(KeyCode.Escape))
