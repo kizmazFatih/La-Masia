@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraMover : MonoBehaviour
 {
     
-    public Transform[] cameraPoints; // [0]: Başlangıç, [1]: Tabela, [2]: Ayarlar, [3]: Yukarı çıkış
+    public Transform[] cameraPoints;
     public float moveSpeed = 10.0f;
     public float rotationSpeed = 5.0f;
 
@@ -77,7 +77,7 @@ public class CameraMover : MonoBehaviour
         isMoving = false;
 
         // Son hedef Tabela ise Canvas'ı aç
-        if (path.Length > 0 && path[^1] == cameraPoints[1]) // cameraPoints[1] = Tabela
+        if (path.Length > 0 && path[^1] == cameraPoints[1])
         {
             if (menuCanvas != null)
                 menuCanvas.SetActive(true);
