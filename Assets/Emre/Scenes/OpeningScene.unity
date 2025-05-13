@@ -1414,6 +1414,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1011478662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bed2050b00aab4d27bf096b15420e756, type: 3}
+  m_PrefabInstance: {fileID: 2108762129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &1011478664
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011478662}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1001 &1241871289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1474,6 +1488,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5330610752923281754, guid: b5128a3d427e242f3b46a63877b23af2, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bdd0686097ef94bf4beec44f2d3aa5dc, type: 2}
     - target: {fileID: 919132149155446097, guid: b5128a3d427e242f3b46a63877b23af2, type: 3}
       propertyPath: m_Name
       value: "KahveDu\u0308kkan\u0131D\u0131s\u0327tan"
@@ -4582,7 +4600,10 @@ PrefabInstance:
     - {fileID: -1639018583518088583, guid: bed2050b00aab4d27bf096b15420e756, type: 3}
     - {fileID: 2563674534113565187, guid: bed2050b00aab4d27bf096b15420e756, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bed2050b00aab4d27bf096b15420e756, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1011478664}
   m_SourcePrefab: {fileID: 100100000, guid: bed2050b00aab4d27bf096b15420e756, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
