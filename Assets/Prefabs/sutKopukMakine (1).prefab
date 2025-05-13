@@ -606,8 +606,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60f34c249a5070409aae49b67bdfcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_open: 0
   indicator: {fileID: 0}
   foamButton: {fileID: 3297539485064111378}
+  milkEffect: {fileID: 0}
 --- !u!114 &7096596781999876656
 MonoBehaviour:
   m_ObjectHideFlags: 0

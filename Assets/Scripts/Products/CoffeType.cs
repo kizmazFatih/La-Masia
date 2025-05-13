@@ -17,7 +17,7 @@ public enum CoffeType
 }
 public enum CoffeeSize
 {
-    Small,
-    Medium,
-    Large
+    Tall,
+    Grande,
+    Venti
 }

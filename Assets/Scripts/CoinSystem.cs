@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class CoinSystem : MonoBehaviour
 {
     public static CoinSystem instance;
+    [SerializeField] private TextMeshProUGUI coinText;
 
     private int coin;
 
@@ -17,10 +19,15 @@ public class CoinSystem : MonoBehaviour
         {
             Destroy(this);
         }
+
+        coinText.text = coin.ToString();
     }
+
+
 
     public void AddCoin(int amount)
     {
         coin += amount;
+        coinText.text = coin.ToString();
     }
 }

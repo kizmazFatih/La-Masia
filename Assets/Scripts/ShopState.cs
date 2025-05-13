@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopState : MonoBehaviour
@@ -21,6 +22,9 @@ public class ShopState : MonoBehaviour
 
     [Range(0, 100)] public float popularity;
     [SerializeField] private int level = 0;
+
+    [Header("UI's")]
+    [SerializeField] private TextMeshProUGUI clockText;
 
 
 
@@ -57,7 +61,7 @@ public class ShopState : MonoBehaviour
             time += 1 * Time.deltaTime;
 
 
-
+            clockText.text = clock.ToString() + ":" + time.ToString("00");
             if (time >= hourLength)
             {
                 clock += 1;

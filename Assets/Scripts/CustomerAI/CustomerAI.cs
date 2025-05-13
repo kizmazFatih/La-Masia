@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
@@ -18,6 +19,10 @@ public class CustomerAI : MonoBehaviour, IInteractable
 
     private Vector3 targetPosition;
 
+
+    [SerializeField] private Canvas orderCanvas;
+    [SerializeField] private TextMeshProUGUI coffeNameText;
+    [SerializeField] private TextMeshProUGUI coffeSizeText;
     public CoffeType myOrder;
     public CoffeeSize mySize;
 
@@ -69,9 +74,13 @@ public class CustomerAI : MonoBehaviour, IInteractable
             {
                 case CustomerState.Waiting:
                     SetDuration();
+                    orderCanvas.gameObject.SetActive(true);
+                    coffeNameText.text = myOrder.ToString();
+                    coffeSizeText.text = mySize.ToString();
                     break;
                 case CustomerState.Sitting:
                     TakeCoffe();
+                    orderCanvas.gameObject.SetActive(false);
                     break;
                 case CustomerState.Leaving:
                     LeaveFromCafe();
@@ -81,6 +90,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
             previousState = currentState;
         }
 
+        orderCanvas.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
 
     }
 
@@ -294,13 +304,13 @@ public class CustomerAI : MonoBehaviour, IInteractable
         }
         switch (cup.GetComponent<Cup>().myCoffeSize)
         {
-            case CoffeeSize.Small:
+            case CoffeeSize.Tall:
                 price += 0;
                 break;
-            case CoffeeSize.Medium:
+            case CoffeeSize.Grande:
                 price += 3;
                 break;
-            case CoffeeSize.Large:
+            case CoffeeSize.Venti:
                 price += 5;
                 break;
             default:
