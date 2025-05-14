@@ -341,7 +341,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
 
                 animator.SetBool("Sitting", true);
                 transform.forward = selectedChair.forward;
-                transform.position = selectedChair.position + new Vector3(0, -0.5f, 0);
+                transform.position = selectedChair.position + new Vector3(0, 0.6f, 0);
 
 
             }
