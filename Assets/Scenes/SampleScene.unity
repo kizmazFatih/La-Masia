@@ -745,7 +745,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7304,7 +7304,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.98490566, g: 0.87015504, b: 0.5184692, a: 1}
-  m_Intensity: 2
+  m_Intensity: 0.5
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7336,7 +7336,7 @@ Light:
       e33: 1
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
+  m_DrawHalo: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -16359,7 +16359,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -19191,7 +19191,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -21042,7 +21042,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -23692,7 +23692,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -24100,8 +24100,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
-  m_Range: 20
+  m_Intensity: 0.26
+  m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -24132,7 +24132,7 @@ Light:
       e33: 1
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
+  m_DrawHalo: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -25511,7 +25511,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -25980,8 +25980,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
-  m_Range: 20
+  m_Intensity: 0.26
+  m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -26012,7 +26012,7 @@ Light:
       e33: 1
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
+  m_DrawHalo: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -32276,7 +32276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   hourLength: 60
-  clock: 9
+  clock: 22
   isOpen: 0
   popularity: 20
   level: 0
@@ -34293,8 +34293,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
-  m_Range: 20
+  m_Intensity: 0.26
+  m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -34325,7 +34325,7 @@ Light:
       e33: 1
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
+  m_DrawHalo: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -35318,8 +35318,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1
-  m_Range: 20
+  m_Intensity: 0.26
+  m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -35350,7 +35350,7 @@ Light:
       e33: 1
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
+  m_DrawHalo: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -37154,7 +37154,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9843137, g: 0.87058824, b: 0.5176471, a: 1}
-  m_Intensity: 1.3
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
