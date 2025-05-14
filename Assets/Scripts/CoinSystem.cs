@@ -6,7 +6,7 @@ public class CoinSystem : MonoBehaviour
     public static CoinSystem instance;
     [SerializeField] private TextMeshProUGUI coinText;
 
-    private int coin;
+    public int coin;
 
 
     private void Awake()

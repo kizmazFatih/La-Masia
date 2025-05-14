@@ -1827,7 +1827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeNumber: 0
-  duration: 90
+  duration: 60
   orderCanvas: {fileID: 2013012742039220232}
   coffeNameText: {fileID: 8279739146441278851}
   coffeSizeText: {fileID: 1062760480173203823}

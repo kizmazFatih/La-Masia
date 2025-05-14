@@ -38,7 +38,7 @@ public class CustomerAI : MonoBehaviour, IInteractable
     {
         animator = GetComponent<Animator>();
 
-        myOrder = CoffeType.Espresso;//(CoffeType)Random.Range(0, 12);
+        myOrder = (CoffeType)Random.Range(0, 8);
         mySize = (CoffeeSize)Random.Range(0, 3);
 
         EventDispatcher.RegisterFunction("GoNextPosition", GoNextPosition);

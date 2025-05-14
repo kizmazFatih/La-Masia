@@ -39,6 +39,7 @@ public class ShopState : MonoBehaviour
 
     void Start()
     {
+        bounce = true;
         dayContinue = true;
         EventDispatcher.SummonEvent("SetCustomerCount", popularity);
 
@@ -75,11 +76,15 @@ public class ShopState : MonoBehaviour
         }
     }
 
+    private bool bounce = true;
     void DayEnd()
     {
-        if (dayEndScreen != null)
+
+        if (dayEndScreen != null && bounce)
         {
             dayEndScreen.SetActive(true);
+            RandomEventsManager.instance.WriteCoin();
+            bounce = false;
         }
     }
 
