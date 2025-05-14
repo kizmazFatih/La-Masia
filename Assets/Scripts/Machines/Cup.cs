@@ -40,10 +40,10 @@ public class Cup : MonoBehaviour
         { CoffeType.IcedLatte,      new CoffeRecipe(0, 7, 0, 0, 1, 8) },
         { CoffeType.Cappuccino,     new CoffeRecipe(0, 4, 4, 0, 1, 0) },
         { CoffeType.IcedCappuccino, new CoffeRecipe(0, 4, 3, 0, 1, 8) },
-        { CoffeType.Mocha,          new CoffeRecipe(0, 7, 0, 2, 1, 0) },
-        { CoffeType.IcedMocha,      new CoffeRecipe(0, 5, 0, 2, 1, 8) },
-        { CoffeType.Macchiato,      new CoffeRecipe(0, 0, 3, 0, 1, 0) },
-        { CoffeType.FlatWhite,      new CoffeRecipe(0, 6, 0, 0, 1, 0) },
+        //{ CoffeType.Mocha,          new CoffeRecipe(0, 7, 0, 2, 1, 0) },
+        //{ CoffeType.IcedMocha,      new CoffeRecipe(0, 5, 0, 2, 1, 8) },
+        //{ CoffeType.Macchiato,      new CoffeRecipe(0, 0, 3, 0, 1, 0) },
+        //{ CoffeType.FlatWhite,      new CoffeRecipe(0, 6, 0, 0, 1, 0) },
         { CoffeType.Cortado,        new CoffeRecipe(0, 3, 0, 0, 1, 0) }
     };
 
