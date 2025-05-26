@@ -24,6 +24,7 @@ public class ShopState : MonoBehaviour
 
     [Header("End of Day Screen")]
     [SerializeField] private GameObject dayEndScreen;
+    private int date = 0;
 
     void Awake()
     {
@@ -35,6 +36,8 @@ public class ShopState : MonoBehaviour
         {
             Destroy(this);
         }
+
+        date = PlayerPrefs.GetInt("Date", 0);
     }
 
     void Start()
@@ -85,6 +88,10 @@ public class ShopState : MonoBehaviour
             dayEndScreen.SetActive(true);
             RandomEventsManager.instance.WriteCoin();
             bounce = false;
+
+            date += 1;
+            PlayerPrefs.SetInt("Date", date);
+            PlayerPrefs.SetInt("Coin", CoinSystem.instance.coin);
         }
     }
 

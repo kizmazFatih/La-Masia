@@ -60,7 +60,7 @@ public class GripPull : MonoBehaviour
             
             if (transform.localEulerAngles.z > 29)
             {
-                cup.GetComponent<Cup>().ice += 2;
+                cup.GetComponent<Cup>().ice += 1;
             }
         }
     }

@@ -125,7 +125,9 @@ public class CustomerAI : MonoBehaviour, IInteractable
     public void Interact(Transform handle)
     {
         if (currentState != CustomerState.InQueue) return;
-        targetPosition = Queue.instance.coffeTakePosition_busy ? transform.position : coffeTakePosition;
+        if (Queue.instance.coffeTakePosition_busy)
+        { targetPosition = transform.position; }
+        else { targetPosition = coffeTakePosition; }
         QuitQueue();
         Move();
         Queue.instance.coffeTakePosition_busy = true;
@@ -243,11 +245,14 @@ public class CustomerAI : MonoBehaviour, IInteractable
         animator.SetBool("Sitting", false);
         animator.SetBool("CoffeTaked", false);
 
-        cup.transform.parent = null;
-        cup.transform.localScale = cup.transform.localScale * 2f;
-        cup.transform.localPosition = Vector3.zero;
-        cup.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        cup.GetComponent<Product>().enabled = true;
+        if (cup != null)
+        {
+            cup.transform.parent = null;
+            cup.transform.localScale = cup.transform.localScale * 2f;
+            cup.transform.localPosition = Vector3.zero;
+            cup.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            cup.GetComponent<Product>().enabled = true;
+        }
 
         targetPosition = quitShopPosition;
         Move();

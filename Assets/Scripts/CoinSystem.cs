@@ -20,6 +20,7 @@ public class CoinSystem : MonoBehaviour
             Destroy(this);
         }
 
+        coin = PlayerPrefs.GetInt("Coin", 0);
         coinText.text = coin.ToString();
     }
 
