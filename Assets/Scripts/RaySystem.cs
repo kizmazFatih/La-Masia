@@ -44,6 +44,7 @@ public class RaySystem : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         handle.GetChild(0).GetComponent<ChocolateSyrup>().FillChocolateSyrup(hit.transform);
+
                     }
                 }
             }
@@ -81,6 +82,7 @@ public class RaySystem : MonoBehaviour
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        if (handle.childCount != 0 && handle.GetChild(0).tag == "Chocolate") return;
                         currentInteractable.Interact(handle);
                     }
 

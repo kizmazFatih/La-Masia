@@ -26,15 +26,16 @@ public class Faucet : Machines, IInteractable
 
             if (handle.childCount != 0 && cupPlace.childCount == 0)
             {
+
                 CameraSwitcher.instance.SwitchCamera(0);
                 ScriptsManager.instance.GoTurn();
                 turnObjects.transform.GetComponent<Outline>().enabled = true;
                 isOn = true;
 
                 product = handle.GetChild(0);
+
                 if (product.tag == "Product")
                 {
-
                     product.parent = cupPlace;
                     product.position = cupPlace.position;
                     product.GetComponent<Product>().work = false;
