@@ -41,14 +41,14 @@ public class RaySystem : MonoBehaviour
             {
                 if (hit.transform.GetComponent<Cup>() != null && handle.GetChild(0).tag == "Chocolate")
                 {
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
+
                         handle.GetChild(0).GetComponent<ChocolateSyrup>().FillChocolateSyrup(hit.transform);
 
                     }
                 }
             }
-
             if (handle.childCount != 0 && handle.GetChild(0).tag == "Pistol") //Elimizde pistol varsa ışını 15 metre olarak ayarlıyoruz ve diğer etkileşimleri blokluyor
             {
                 rayDistance = 15f;
